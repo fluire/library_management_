@@ -83,18 +83,22 @@ class Library:
             return 
         
             
-        done = self.__storage.book_checkout(book_name)
+        done = self.__storage.book_checkout(book_name) #checking the availability of book updating status of it if True 
 
         if done:
             self.__storage.user_book_checkout(user_id,book_name)
             logger.info(f"Book {book_name} checked out to user {user_id}.")
         return done
 
-    def check_in_book(self, user_id: str, isbn: str):
-        if not isinstance(user_id, str):
-            raise ValueError("User ID must be a string")
-        if not isinstance(isbn, str):
-            raise ValueError("ISBN must be a string")
+    def checkin_book(self, user_id: str, book_name: str):
+        
+        available, user_data = self.__storage.check_user(user_id,return_data=True)
+        if available and book_name not in user_data["_User__borrowed_books"]:
+            logger.info("Wrong book checkin")
+            return False
+        self.__storage.user_book_checkin(user_id,book_name)
+        return True
+        
         
         user = next((user for user in self.__users if user.user_id == user_id), None)
         book = next((book for book in self.__books if book.isbn == isbn), None)

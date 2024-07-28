@@ -32,25 +32,26 @@ class TestLibrarySystem(unittest.TestCase):
         self.assertEqual(data["_User__name"], "Test User 2")
 
 
-    def test3_check_out_book(self):
+    def test3a_check_out_book(self):
         status = self.library.checkout_book("001", "Test Book")
-        self.assertTrue(status)
+        available = self.library.track_availability("Test Book")
+        self.assertFalse(available) #book will not be avalable after checkout
 
-    def test4_delete_book(self):
+
+        
+
+    def test3b_check_in_book(self):
+        status  = self.library.checkin_book("001", "Test Book")
+        available = self.library.track_availability("Test Book")
+        self.assertTrue(available) # book will be available after checkin
+    
+    def test4a_delete_book(self):
         status = self.library.delete_book("Test Book","1234567890")
         self.assertTrue(status)
 
-    def test5_delete_user(self):
+    def test4b_delete_user(self):
         status = self.library.delete_user("001")
         self.assertTrue(status)
-        
-
-    # def test_check_in_book(self):
-    #     self.library.check_in_book("002", "0987654321")
-    #     book = self.storage.read_books()[0]
-    #     user = self.storage.read_users()[0]
-    #     self.assertFalse(book['is_checked_out'])
-    #     self.assertEqual(len(user['borrowed_books']), 0)
 
 
 if __name__ == '__main__':

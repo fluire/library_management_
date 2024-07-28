@@ -99,13 +99,18 @@ class Storage:
         return available
     
     def update_book_status(self,book_name:str,status:bool,data:list[dict]=None):
+        no_data = False
         if not data:
+            no_data = True
             with open(self.book_file,"r") as fp:
                 data = json.load(fp)
         for i in data:
             if i["_Book__title"] == book_name:
                 i["_Book__is_checked_out"] = status
                 break
+        if no_data:
+            with open(self.book_file,"w") as fp:
+                json.dump(data,fp,indent=4)
         return True
         
     
@@ -127,5 +132,16 @@ class Storage:
         with open(self.user_file, 'w') as f:
             json.dump(data, f, indent=4)
     
+    def user_book_checkin(self,user_id: str,book_name:str):
+        with open(self.user_file,"r") as fp:
+            data = json.load(fp)
+        for i in data:
+            if i["_User__user_id"] == user_id:
+                i["_User__borrowed_books"].remove(book_name)
+                break
+        with open(self.user_file, 'w') as f:
+            json.dump(data, f, indent=4)
+        self.update_book_status(book_name,False)
+        return True
                 
         

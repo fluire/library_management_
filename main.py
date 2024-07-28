@@ -6,14 +6,14 @@ from core.utils import generate_unique_id
 # from core.library import checkout_management
 
 def main_menu():
-    print("\nLibrary Management System")
-    print("1. Add Book")
-    print("2. List Books")
-    print("3. Add User")
-    print("4. get users list")
-    print("5. check availability")
-    print("6. Checkout Book")
-    print("7. Exit")
+    logger.info("\nLibrary Management System")
+    logger.info("1. Add Book")
+    logger.info("2. List Books")
+    logger.info("3. Add User")
+    logger.info("4. get users list")
+    logger.info("5. check availability")
+    logger.info("6. Checkout Book")
+    logger.info("7. Checkin Book")
     choice = input("Enter choice: ")
     return choice
 
@@ -52,12 +52,17 @@ def main():
             user_id = input("Enter user ID: ")
             book_name = input("Enter title of the book to checkout: ")
             library.checkout_book(user_id, book_name)
+
+        elif choice == '7':
+            user_id = input("Enter user ID: ")
+            book_name = input("Enter title of the book to checkin: ")
+            library.checkin_book(user_id, book_name)
             
-        elif choice == '5':
-            print("Exiting.")
+        elif choice == '8':
+            logger.info("Exiting.")
             break
         else:
-            print("Invalid choice, please try again.")
+            logger.info("Invalid choice, please try again.")
 
 if __name__ == "__main__":
     main()
