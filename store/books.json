@@ -1,0 +1,26 @@
+[
+    {
+        "_Book__title": "dsfdf",
+        "_Book__author": "12312",
+        "_Book__isbn": "2312312",
+        "_Book__is_checked_out": true,
+        "_Book__due_date": null,
+        "_Book__date_added": "27:07:24"
+    },
+    {
+        "_Book__title": "wfsdf",
+        "_Book__author": "sdasda",
+        "_Book__isbn": "sdfa",
+        "_Book__is_checked_out": false,
+        "_Book__due_date": null,
+        "_Book__date_added": "27:07:24"
+    },
+    {
+        "_Book__title": "sdgfs",
+        "_Book__author": "12312",
+        "_Book__isbn": "dfsf",
+        "_Book__is_checked_out": false,
+        "_Book__due_date": null,
+        "_Book__date_added": "27:07:24"
+    }
+]
